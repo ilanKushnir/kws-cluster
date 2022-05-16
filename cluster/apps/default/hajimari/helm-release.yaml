@@ -108,10 +108,12 @@ spec:
         ingressClassName: "traefik"
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          external-dns/is-public: "true"
           hajimari.io/enable: "true"
           hajimari.io/icon: "weather-sunset"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: "networking-internal-only@kubernetescrd"
+          traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd
         hosts:
           - host: "hajimari.${SECRET_DOMAIN}"
             paths:
