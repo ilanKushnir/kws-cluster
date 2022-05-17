@@ -11,4 +11,5 @@ resources:
   - default
   - dev
   - kube-system
+  - media
   - networking
