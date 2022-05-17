@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-sso
+  namespace: networking
+spec:
+  selector:
+    app: traefik-sso
+  ports:
+    - protocol: TCP
+      port: 4181
+      targetPort: 4181

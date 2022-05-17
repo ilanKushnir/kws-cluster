@@ -1,0 +1,32 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik-sso-ingress
+  namespace: networking
+  labels:
+    app.kubernetes.io/name: &middleware traefik-sso
+    app.kubernetes.io/instance: *middleware
+  annotations:
+    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+    external-dns/is-public: "true"
+    traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd, networking-traefik-sso@kubernetescrd
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+spec:
+  ingressClassName: "traefik"
+  rules:
+    - host: &host "oauth.${SECRET_DOMAIN}"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: *middleware
+                port:
+                  number: 4181
+  tls:
+    - hosts:
+        - *host
+      secretName: "oauth-tls"
