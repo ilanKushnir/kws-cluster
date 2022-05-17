@@ -7,5 +7,6 @@ resources:
   - longhorn-system.yaml
   - metallb-system.yaml
   - media.yaml
+  - monitoring.yaml
   - networking.yaml
   - system-upgrade.yaml

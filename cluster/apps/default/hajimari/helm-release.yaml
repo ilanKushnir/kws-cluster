@@ -37,7 +37,7 @@ spec:
           - kube-system
           - longhorn-system
           - media
-#          - monitoring
+          - monitoring
           - networking
       name: "Ilan"
       customApps:

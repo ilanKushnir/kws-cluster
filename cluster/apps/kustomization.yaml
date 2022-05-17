@@ -10,6 +10,8 @@ resources:
   # - system-upgrade
   - default
   - dev
+  - flux-system
   - kube-system
   - media
+  - monitoring
   - networking
