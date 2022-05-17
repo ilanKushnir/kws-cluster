@@ -12,15 +12,19 @@
     name:
       - apt-transport-https
       - arptables
+      - bash
       - ebtables
       - ca-certificates
       - curl
       - ebtables
+      - gawk
       - gdisk
+      - grep
       - hdparm
       - htop
       - iputils-ping
       - ipvsadm
+      - jq
       - lvm2
       - nano
       - net-tools
@@ -33,6 +37,7 @@
       - software-properties-common
       - unattended-upgrades
       - unzip
+      - util-linux
     install_recommends: false
     update_cache: true
     cache_valid_time: 3600

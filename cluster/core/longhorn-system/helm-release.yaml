@@ -1,0 +1,53 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: longhorn
+  namespace: longhorn-system
+spec:
+  releaseName: longhorn
+  interval: 5m
+  chart:
+    spec:
+      # renovate: registryUrl=https://charts.longhorn.io
+      chart: longhorn
+      version: 1.2.4
+      sourceRef:
+        kind: HelmRepository
+        name: longhorn-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    persistence:
+      defaultClass: true
+      defaultClassReplicaCount: 3
+      reclaimPolicy: Retain
+    defaultSettings:
+      backupstorePollInterval: 300
+      backupTarget: s3://bakcup-longhorn@il-central/
+      backupTargetCredentialSecret: longhorn-s3-backups-secrets
+      createDefaultDiskLabeledNodes: true
+      defaultDataLocality: best-effort
+      nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
+      concurrentAutomaticEngineUpgradePerNodeLimit: 1
+      storageMinimalAvailablePercentage: 10
+      defaultReplicaCount: 3
+      defaultLonghornStaticStorageClass: longhorn
+    ingress:
+      enabled: true
+      host: "longhorn.${SECRET_DOMAIN}"
+      path: /
+      tls: true
+      tlsSecret: longhorn-tls
+      annotations:
+        coredns.io/hostname: "longhorn.${SECRET_DOMAIN}"
+        cert-manager.io/cluster-issuer: letsencrypt-production
+        external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+        external-dns/is-public: "true"
+        traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        traefik.ingress.kubernetes.io/router.middlewares: "networking-cloudflare-only@kubernetescrd"
+        kubernetes.io/ingress.class: "traefik"
+        hajimari.io/enable: "true"
+        hajimari.io/icon: "file-table-box"
+        hajimari.io/group: "storage"
+        hajimari.io/appName: "longhorn"

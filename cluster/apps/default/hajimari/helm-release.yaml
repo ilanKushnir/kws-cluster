@@ -31,8 +31,9 @@ spec:
       namespaceSelector:
         matchNames:
           - default
+          - longhorn-system
           - networking
-      name: "you"
+      name: "Ilan"
       customApps:
         - name: Some External Cluster Service
           url: http://192.168.1.100:5000
