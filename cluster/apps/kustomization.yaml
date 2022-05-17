@@ -9,5 +9,6 @@ resources:
   # the below line
   # - system-upgrade
   - default
+  - dev
   - kube-system
   - networking
