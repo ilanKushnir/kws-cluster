@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &app code-server
+  namespace: dev
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: *app
+      app.kubernetes.io/instance: *app
+  strategy:
+    type: RollingUpdate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: *app
+        app.kubernetes.io/instance: *app
+    spec:
+      containers:
+        - name: *app
+          image: codercom/code-server:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PASSWORD
+              value: "${SECRET_CODE_SERVER_PASSWORD}"
+            - name: START_DIR
+              value: "/home/projects"
+          volumeMounts:
+            - name: config
+              mountPath: "/home/coder"
+            - name: data
+              mountPath: "/home/projects"
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: code-server-config-pvc
+        - name: data
+          nfs:
+            path: /data/dev-projects
+            server: "${NAS_ADDR}"
