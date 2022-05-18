@@ -15,4 +15,4 @@ resources:
   - sabnzbd
   - sonarr
   - tautulli
-#  - unpackerr
+  - unpackerr
