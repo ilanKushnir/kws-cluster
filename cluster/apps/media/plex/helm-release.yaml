@@ -1,0 +1,105 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: plex
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: plex
+      version: 6.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: true
+  values:
+    image:
+      repository: ghcr.io/k8s-at-home/plex
+      tag: v1.25.9.5721-965587f64
+    env:
+      TZ: "${TIMEZONE}"
+      PLEX_CLAIM: "${SECRET_PLEX_CLAIM}"
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: OnRootMismatch
+      supplementalGroups:
+        - 44
+        - 109
+        - 100
+        - 1000
+    service:
+      main:
+        type: LoadBalancer
+        externalIPs:
+          - "${SVC_PLEX_ADDR}"
+        externalTrafficPolicy: Local
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "plex"
+          hajimari.io/appName: "plex"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+        hosts:
+          - host: &host "plex.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host
+            secretName: "plex-tls"
+    persistence:
+      config:
+        enabled: true
+        existingClaim: plex-config-v1
+      media:
+        enabled: true
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "${NAS_ADDR}"
+            path: /media
+        mountPath: /media
+        readOnly: true
+#      backup:
+#        enabled: true
+#        type: custom
+#        volumeSpec:
+#          nfs:
+#            server: "expanse.${SECRET_PRIVATE_DOMAIN}"
+#            path: /tycho/Apps/External/Backups/plex
+#        mountPath: /config/Backups
+#        readOnly: false
+      transcode:
+        enabled: true
+        type: emptyDir
+#    affinity:
+#      nodeAffinity:
+#        requiredDuringSchedulingIgnoredDuringExecution:
+#          nodeSelectorTerms:
+#            - matchExpressions:
+#                - key: feature.node.kubernetes.io/custom-intel-gpu
+#                  operator: In
+#                  values:
+#                    - "true"
+    podAnnotations:
+      configmap.reloader.stakater.com/reload: "plex-promtail"
+    resources:
+      requests:
+#        gpu.intel.com/i915: 1
+        cpu: 100m
+        memory: 2000Mi
+      limits:
+#        gpu.intel.com/i915: 1
+        memory: 10000Mi
