@@ -100,15 +100,6 @@ resource "cloudflare_record" "root" {
   ttl     = 1
 }
 
-resource "cloudflare_record" "plex" {
-  name    = "plex"
-  zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
-  value   = "ipv4.${data.sops_file.cloudflare_secrets.data["cloudflare_domain"]}"
-  proxied = true
-  type    = "CNAME"
-  ttl     = 1
-}
-
 resource "cloudflare_page_rule" "plex_bypass_cache" {
   zone_id = lookup(data.cloudflare_zones.domain.zones[0], "id")
   target  = "plex.${data.sops_file.cloudflare_secrets.data["cloudflare_domain"]}/*"
