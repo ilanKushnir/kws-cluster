@@ -62,6 +62,22 @@ spec:
               url: "https://github.com/ilanKushnir/kws-charts"
             - name: Medium post
               url: "https://medium.com/@ilankushnir/kws-cluster-e7e079cf103b"
+        - name: Self Hosted
+          links:
+            - name: Awesome SH
+              url: "https://github.com/awesome-selfhosted/awesome-selfhosted"
+            - name: K8S@Home Charts
+              url: "https://github.com/k8s-at-home/charts/tree/master/charts"
+            - name: Linuxserver
+              url: "https://fleet.linuxserver.io/"
+        - name: Dev
+          links:
+            - name: Codepen
+              url: "https://codepen.io/"
+            - name: Devdocs
+              url: "https://devdocs.io"
+            - name: Devhints
+              url: "https://devhints.io"
         - name: Communicate
           links:
             - name: Discord
@@ -78,22 +94,6 @@ spec:
               url: "https://dropbox.com"
             - name: Drive
               url: "https://drive.google.com"
-        - name: Design
-          links:
-            - name: Awwwards
-              url: "https://awwwards.com"
-            - name: Dribbble
-              url: "https://dribbble.com"
-            - name: Muz.li
-              url: "https://medium.muz.li/"
-        - name: Dev
-          links:
-            - name: Codepen
-              url: "https://codepen.io/"
-            - name: Devdocs
-              url: "https://devdocs.io"
-            - name: Devhints
-              url: "https://devhints.io"
         - name: Media
           links:
             - name: Spotify
