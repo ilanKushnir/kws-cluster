@@ -50,6 +50,9 @@ spec:
         - name: Nas S3 Buckets
           url: "http://${NAS_ADDR}:${NAS_MINIO_DASHBOARD_PORT}"
           icon: nas
+        - name: Pi-Hole
+          url: "http://${LOCAL_DNS_SERVER_ADDR}/admin"
+          icon: pi-hole
       groups:
         - name: KWS Cluster
           links:
