@@ -15,4 +15,5 @@ resources:
   - sabnzbd
   - sonarr
   - tautulli
+  - trash-updater
   - unpackerr
