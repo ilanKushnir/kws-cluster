@@ -6,7 +6,7 @@ resources:
   - media-browser
   - navidrome
   - overseerr
-  - plex
+#  - plex
   - prowlarr
   - pyload
   - qbittorrent
