@@ -9,7 +9,7 @@ resources:
   - plex
   - prowlarr
   - pyload
-  - qbittorrent
+#  - qbittorrent
   - radarr
   - readarr
   - sabnzbd
