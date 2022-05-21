@@ -33,7 +33,6 @@ spec:
       bittorrent:
         enabled: true
         type: LoadBalancer
-#         loadBalancerIP: "${SVC_QBITTORRENT_ADDR}"
         externalIPs:
           - "${SVC_QBITTORRENT_ADDR}"
         ports:
@@ -65,17 +64,6 @@ spec:
           - hosts:
               - *host
             secretName: "qbittorent-tls"
-#    metrics:
-#      enabled: true
-#      exporter:
-#        image:
-#          repository: ghcr.io/k8s-at-home/prometheus-qbittorrent-exporter
-#          tag: v1.2.0
-#      serviceMonitor:
-#        interval: 1m
-#        scrapeTimeout: 10s
-#      prometheusRule:
-#        enabled: true
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
@@ -93,8 +81,8 @@ spec:
         volumeSpec:
           nfs:
             server: "${NAS_ADDR}"
-            path: /media
-        mountPath: /media
+            path: /media/downloads
+        mountPath: /downloads
     resources:
       requests:
         cpu: 100m
