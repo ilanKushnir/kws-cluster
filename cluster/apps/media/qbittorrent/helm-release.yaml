@@ -82,7 +82,7 @@ spec:
           nfs:
             server: "${NAS_ADDR}"
             path: /media/downloads
-        mountPath: /downloads
+        mountPath: /media/downloads
     resources:
       requests:
         cpu: 100m
