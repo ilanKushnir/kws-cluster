@@ -32,6 +32,8 @@ spec:
               value: "${SECRET_CODE_SERVER_PASSWORD}"
             - name: START_DIR
               value: "/home/projects"
+            - name: EXTENSIONS_GALLERY
+              value: '{"serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery","cacheUrl": "https://vscode.blob.core.windows.net/gallery/index","itemUrl": "https://marketplace.visualstudio.com/items","controlUrl": "","recommendationsUrl": ""}'
           volumeMounts:
             - name: config
               mountPath: "/home/coder"
