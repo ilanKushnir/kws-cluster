@@ -17,3 +17,5 @@ resources:
   - tautulli
   - trash-updater
   - unpackerr
+  - calibre
+  - calibre-web

@@ -1,0 +1,66 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: calibre-web
+  namespace: media
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: calibre-web
+      version: 8.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: k8s-at-home-charts
+        namespace: flux-system
+      interval: 5m
+  values:
+    image:
+      repository: ghcr.io/linuxserver/calibre-web
+      tag: arm64v8-nightly-version-790080f2
+
+    env:
+      TZ: "${TIMEZONE}"
+      PGID: 65539
+      DOCKER_MODS: "arm64v8-nightly-version-790080f2"
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: calibre-web-config
+      media:
+        enabled: true
+        type: nfs
+        server: "${NAS_ADDR}"
+        path: /media/books
+        mountPath: /data/books
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: "traefik"
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          hajimari.io/enable: "true"
+          hajimari.io/icon: "text-box"
+          hajimari.io/appName: "calibre"
+          traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+          traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd ,networking-traefik-sso@kubernetescrd
+          external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+          external-dns/is-public: "true"
+        hosts:
+          - host: &host-main "calibre-web.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host-main
+            secretName: "calibre-web-tls"
+
+    resources:
+      requests:
+        cpu: 15m
+        memory: 204M
+      limits:
+        memory: 380M
