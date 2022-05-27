@@ -39,6 +39,7 @@ spec:
           - media
           - monitoring
           - networking
+      title: KWS Cluster - dashboard
       name: "Ilan"
       customApps:
         - name: Nas Server
@@ -129,16 +130,16 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "apps-box"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd ,networking-traefik-sso@kubernetescrd
         hosts:
-          - host: "hajimari.${SECRET_DOMAIN}"
+          - host: "kws.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "hajimari.${SECRET_DOMAIN}"
-            secretName: "hajimari-tls"
+              - "kws.${SECRET_DOMAIN}"
+            secretName: "kws-tls"
     persistence:
       data:
         enabled: true
