@@ -43,13 +43,13 @@ spec:
           cert-manager.io/cluster-issuer: "letsencrypt-production"
           hajimari.io/enable: "true"
           hajimari.io/icon: "text-box"
-          hajimari.io/appName: "calibre"
+          hajimari.io/appName: "calibre-web"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd ,networking-traefik-sso@kubernetescrd
           external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
           external-dns/is-public: "true"
         hosts:
-          - host: &host-main "calibre-web.${SECRET_DOMAIN}"
+          - host: &host-main "books.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
