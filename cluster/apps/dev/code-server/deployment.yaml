@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: *app
-          image: codercom/code-server:latest
+          image: ilankushnir/kws-code-server:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -35,14 +35,9 @@ spec:
             - name: EXTENSIONS_GALLERY
               value: '{"serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery","cacheUrl": "https://vscode.blob.core.windows.net/gallery/index","itemUrl": "https://marketplace.visualstudio.com/items","controlUrl": "","recommendationsUrl": ""}'
           volumeMounts:
-            - name: config
-              mountPath: "/home/coder"
             - name: data
               mountPath: "/home/projects"
       volumes:
-        - name: config
-          persistentVolumeClaim:
-            claimName: code-server-config-pvc
         - name: data
           nfs:
             path: /data/dev-projects

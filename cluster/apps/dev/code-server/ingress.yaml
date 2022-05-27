@@ -14,7 +14,7 @@ metadata:
     hajimari.io/appName: "code server"
     hajimari.io/enable: "true"
     hajimari.io/icon: "code-braces-box"
-    traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd ,networking-traefik-sso@kubernetescrd
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
 spec:
   ingressClassName: "traefik"
