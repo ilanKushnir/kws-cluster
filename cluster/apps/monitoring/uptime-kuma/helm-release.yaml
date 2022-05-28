@@ -39,6 +39,7 @@ spec:
         ports:
           http:
             port: 3001
+
     ingress:
       main:
         enabled: true
@@ -52,14 +53,14 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd
         hosts:
-          - host: uptime.${SECRET_DOMAIN}
+          - host: "uptime.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
-          - secretName: uptime-tls
-          - hosts:
-              - uptime.${SECRET_DOMAIN}
+          - secretName: tls.uptime
+            hosts:
+              - "uptime.${SECRET_DOMAIN}"
     persistence:
       data:
         enabled: true
