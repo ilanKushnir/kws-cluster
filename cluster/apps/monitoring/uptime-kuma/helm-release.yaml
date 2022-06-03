@@ -27,7 +27,7 @@ spec:
     fullnameOverride: uptime
     image:
       repository: louislam/uptime-kuma
-      tag: 1.16.0-alpine
+      tag: 1.16.1-alpine
     env:
       TZ: ${TIMEZONE}
       UPTIME_KUMA_DISABLE_FRAME_SAMEORIGIN: 0
