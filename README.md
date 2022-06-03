@@ -6,9 +6,6 @@
 [![k3s](https://img.shields.io/badge/k3s-v1.23-brightgreen?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=for-the-badge)](https://github.com/pre-commit/pre-commit)
 [![Lines of code](https://img.shields.io/tokei/lines/github/ilanKushnir/kws-cluster?style=for-the-badge&color=brightgreen&label=lines&logo=codefactor&logoColor=white)](https://github.com/onedr0p/home-ops/graphs/contributors)
-### PLEASE NOTE!
-#### the repo is recreated from scratch on the 15th of Mat 2022
-#### due to SD cards failure - moved the whole cluster's OS to SSD attached storage
 </div>
 <br/>
 
