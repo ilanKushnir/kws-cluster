@@ -80,6 +80,16 @@ spec:
             url: http://loki-gateway:80
     dashboards:
       default:
+        # Ref: https://grafana.com/grafana/dashboards/12175
+        calico-felix:
+          gnetId: 12175
+          revision: 5
+          datasource: Prometheus
+        # Ref: https://grafana.com/grafana/dashboards/13665
+        speedtest-exporter:
+          gnetId: 13665
+          revision: 4
+          datasource: Prometheus
         # Ref: https://grafana.com/grafana/dashboards/13502
         minio:
           gnetId: 13502

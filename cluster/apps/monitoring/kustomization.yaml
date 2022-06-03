@@ -5,4 +5,5 @@ resources:
   - grafana
   - karma
   - kube-prometheus-stack
+  - speedtest-exporter
   - uptime-kuma
