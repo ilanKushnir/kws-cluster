@@ -5,7 +5,7 @@ resources:
   - grafana
   - karma
   - loki
-  - promtail
+#  - promtail
   - kube-prometheus-stack
   - speedtest-exporter
   - uptime-kuma
