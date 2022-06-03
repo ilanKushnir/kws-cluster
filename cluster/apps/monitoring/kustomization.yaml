@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
   - grafana
   - karma
+  - loki
+  - promtail
   - kube-prometheus-stack
   - speedtest-exporter
   - uptime-kuma
