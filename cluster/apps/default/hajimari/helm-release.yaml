@@ -33,7 +33,9 @@ spec:
       namespaceSelector:
         matchNames:
           - default
+          - dev-tools
           - dev
+          - prod
           - kube-system
           - longhorn-system
           - media

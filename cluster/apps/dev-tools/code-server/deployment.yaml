@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: &app code-server
-  namespace: dev
+  namespace: dev-tools
   labels:
     app.kubernetes.io/name: *app
     app.kubernetes.io/instance: *app
