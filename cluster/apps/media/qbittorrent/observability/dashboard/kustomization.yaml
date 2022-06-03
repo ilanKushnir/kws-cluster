@@ -3,13 +3,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: media
 configMapGenerator:
-  - name: lidarr-dashboard
+  - name: qbittorrent-dashboard
     files:
-      - lidarr-dashboard.json=dashboard.json
+      - qbittorrent-dashboard.json=dashboard.json
 generatorOptions:
   disableNameSuffixHash: true
   annotations:
     kustomize.toolkit.fluxcd.io/substitute: disabled
-    grafana_folder: Lidarr
   labels:
     grafana_dashboard: "true"
