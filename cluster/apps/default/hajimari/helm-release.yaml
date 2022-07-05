@@ -132,7 +132,7 @@ spec:
           hajimari.io/enable: "true"
           hajimari.io/icon: "apps-box"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-          traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd ,networking-traefik-sso@kubernetescrd
+          traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd
         hosts:
           - host: "kws.${SECRET_DOMAIN}"
             paths:
