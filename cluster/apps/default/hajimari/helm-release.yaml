@@ -33,12 +33,15 @@ spec:
       namespaceSelector:
         matchNames:
           - default
+          - dev-tools
           - dev
+          - prod
           - kube-system
           - longhorn-system
           - media
           - monitoring
           - networking
+      title: KWS Cluster - dashboard
       name: "Ilan"
       customApps:
         - name: Nas Server
@@ -50,6 +53,9 @@ spec:
         - name: Nas S3 Buckets
           url: "http://${NAS_ADDR}:${NAS_MINIO_DASHBOARD_PORT}"
           icon: nas
+        - name: Pi-Hole
+          url: "http://${LOCAL_DNS_SERVER_ADDR}/admin"
+          icon: pi-hole
       groups:
         - name: KWS Cluster
           links:
@@ -59,6 +65,22 @@ spec:
               url: "https://github.com/ilanKushnir/kws-charts"
             - name: Medium post
               url: "https://medium.com/@ilankushnir/kws-cluster-e7e079cf103b"
+        - name: Self Hosted
+          links:
+            - name: Awesome SH
+              url: "https://github.com/awesome-selfhosted/awesome-selfhosted"
+            - name: K8S@Home Charts
+              url: "https://github.com/k8s-at-home/charts/tree/master/charts"
+            - name: Linuxserver
+              url: "https://fleet.linuxserver.io/"
+        - name: Dev
+          links:
+            - name: Codepen
+              url: "https://codepen.io/"
+            - name: Devdocs
+              url: "https://devdocs.io"
+            - name: Devhints
+              url: "https://devhints.io"
         - name: Communicate
           links:
             - name: Discord
@@ -75,22 +97,6 @@ spec:
               url: "https://dropbox.com"
             - name: Drive
               url: "https://drive.google.com"
-        - name: Design
-          links:
-            - name: Awwwards
-              url: "https://awwwards.com"
-            - name: Dribbble
-              url: "https://dribbble.com"
-            - name: Muz.li
-              url: "https://medium.muz.li/"
-        - name: Dev
-          links:
-            - name: Codepen
-              url: "https://codepen.io/"
-            - name: Devdocs
-              url: "https://devdocs.io"
-            - name: Devhints
-              url: "https://devhints.io"
         - name: Media
           links:
             - name: Spotify
@@ -128,14 +134,14 @@ spec:
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd
         hosts:
-          - host: "hajimari.${SECRET_DOMAIN}"
+          - host: "kws.${SECRET_DOMAIN}"
             paths:
               - path: /
                 pathType: Prefix
         tls:
           - hosts:
-              - "hajimari.${SECRET_DOMAIN}"
-            secretName: "hajimari-tls"
+              - "kws.${SECRET_DOMAIN}"
+            secretName: "kws-tls"
     persistence:
       data:
         enabled: true

@@ -9,7 +9,9 @@ resources:
   # the below line
   # - system-upgrade
   - default
-  - dev
+  - dev-tools
+#  - dev
+#  - prod
   - flux-system
   - kube-system
   - media

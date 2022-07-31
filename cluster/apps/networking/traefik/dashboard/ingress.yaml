@@ -6,9 +6,11 @@ metadata:
   namespace: networking
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
+    external-dns.alpha.kubernetes.io/target: "ipv4.${SECRET_DOMAIN}"
+    external-dns/is-public: "true"
     hajimari.io/appName: "traefik"
     hajimari.io/enable: "true"
-    hajimari.io/icon: "web"
+    hajimari.io/icon: "web-box"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     traefik.ingress.kubernetes.io/router.middlewares: networking-cloudflare-only@kubernetescrd, networking-traefik-sso@kubernetescrd
 spec:

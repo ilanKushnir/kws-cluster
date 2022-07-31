@@ -1,0 +1,29 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: tag-tracker-errors
+  namespace: media
+spec:
+  schedule: "0 * * * *"
+  concurrencyPolicy: "Forbid"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      backoffLimit: 3
+      ttlSecondsAfterFinished: 300
+      template:
+        spec:
+          automountServiceAccountToken: false
+          restartPolicy: Never
+          containers:
+            - name: qbittorrent-scripts
+              image: ghcr.io/k8s-at-home/qbittorrent-scripts:v1.0.2
+              env:
+                - name: QB_HOST
+                  value: http://qbittorrent:8080
+                - name: QB_TAG
+                  value: "Tracker Errors"
+              args:
+                - "/app/tag-tracker-errors.py"

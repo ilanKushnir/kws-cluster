@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: &app code-server
+  namespace: dev-tools
+  labels:
+    app.kubernetes.io/name: *app
+    app.kubernetes.io/instance: *app
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: *app
+      app.kubernetes.io/instance: *app
+  strategy:
+    type: RollingUpdate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: *app
+        app.kubernetes.io/instance: *app
+    spec:
+      containers:
+        - name: *app
+          image: ilankushnir/kws-code-server:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PASSWORD
+              value: "${SECRET_CODE_SERVER_PASSWORD}"
+            - name: START_DIR
+              value: "/home/projects"
+            - name: EXTENSIONS_GALLERY
+              value: '{"serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery","cacheUrl": "https://vscode.blob.core.windows.net/gallery/index","itemUrl": "https://marketplace.visualstudio.com/items","controlUrl": "","recommendationsUrl": ""}'
+          volumeMounts:
+            - name: data
+              mountPath: "/home/projects"
+      volumes:
+        - name: data
+          nfs:
+            path: /data/dev-projects
+            server: "${NAS_ADDR}"
