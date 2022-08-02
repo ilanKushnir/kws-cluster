@@ -4,3 +4,4 @@ resources:
   - low.yaml
   - medium.yaml
   - high.yaml
+  - default.yaml
