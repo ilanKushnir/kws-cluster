@@ -25,22 +25,22 @@ So please maintain the following backups for a doomsday:
 * Plan an automatic flow
 
 ## 🚶 Recovery steps - General cluster failure
-
-1. Follow instructions.md
+1. Reinstall OS on SSDs (`Ubuntu 22.04`)
+2. Follow instructions.md
    * Prepare Ubuntu with ansible
    * Prepare K3S with ansible
-2. Git repo
+3. Git repo
    * Set a backup branch on the current repo state (last commit)
    * Reset main branch to Longhorn deployment step
-3. Continue instructions.md
+4. Continue instructions.md
    * GitOps with Flux
-4. Run Longhorn UI
+5. Run Longhorn UI
    * Mount disks
    * Make them schedulable
    * Make sure you can access the S3 backups
-5. Git repo - Reset main branch to current state
+6. Git repo - Reset main branch to current state
    * if it fails, reset step by step
-6. Recover PV/PVCs, same steps for each deployment
+7. Recover PV/PVCs, same steps for each deployment
    * Deploy and make sure its running properly
    * Scale to `0`
    * Delete `PVC`
