@@ -44,8 +44,8 @@ For provisioning the following tools will be used:
 ### 💻 Systems
 
 - One or more nodes with a fresh install of [Ubuntu Server 22.04](https://ubuntu.com/download/server).
-  - These nodes can be bare metal or VMs.
-  - An odd number of control plane nodes, greater than or equal to 3 is required if deploying more than one control plane node.
+   - These nodes can be bare metal or VMs.
+   - An odd number of control plane nodes, greater than or equal to 3 is required if deploying more than one control plane node.
 - A [Cloudflare](https://www.cloudflare.com/) account with a domain, this will be managed by Terraform and external-dns. You can [register new domains](https://www.cloudflare.com/products/registrar/) directly thru Cloudflare.
 - Some experience in debugging problems and a positive attitude ;)
 
@@ -55,9 +55,9 @@ For provisioning the following tools will be used:
 
 1. Install the **most recent versions** of the following CLI tools on your workstation, if you are using [Homebrew](https://brew.sh/) on MacOS or Linux skip to steps 3 and 4.
 
-    * Required: [age](https://github.com/FiloSottile/age), [ansible](https://www.ansible.com), [flux](https://toolkit.fluxcd.io/), [gitleaks](https://github.com/zricethezav/gitleaks), [go-task](https://github.com/go-task/task), [ipcalc](http://jodies.de/ipcalc), [jq](https://stedolan.github.io/jq/), [kubectl](https://kubernetes.io/docs/tasks/tools/), [pre-commit](https://github.com/pre-commit/pre-commit), [sops](https://github.com/mozilla/sops), [terraform](https://www.terraform.io), [yq](https://github.com/mikefarah/yq)
+   * Required: [age](https://github.com/FiloSottile/age), [ansible](https://www.ansible.com), [flux](https://toolkit.fluxcd.io/), [gitleaks](https://github.com/zricethezav/gitleaks), [go-task](https://github.com/go-task/task), [ipcalc](http://jodies.de/ipcalc), [jq](https://stedolan.github.io/jq/), [kubectl](https://kubernetes.io/docs/tasks/tools/), [pre-commit](https://github.com/pre-commit/pre-commit), [sops](https://github.com/mozilla/sops), [terraform](https://www.terraform.io), [yq](https://github.com/mikefarah/yq)
 
-    * Recommended: [direnv](https://github.com/direnv/direnv), [helm](https://helm.sh/), [kustomize](https://github.com/kubernetes-sigs/kustomize), [prettier](https://github.com/prettier/prettier), [stern](https://github.com/stern/stern), [yamllint](https://github.com/adrienverge/yamllint)
+   * Recommended: [direnv](https://github.com/direnv/direnv), [helm](https://helm.sh/), [kustomize](https://github.com/kubernetes-sigs/kustomize), [prettier](https://github.com/prettier/prettier), [stern](https://github.com/stern/stern), [yamllint](https://github.com/adrienverge/yamllint)
 
 2. This guide heavily relies on [go-task](https://github.com/go-task/task) as a framework for setting things up. It is advised to learn and understand the commands it is running under the hood.
 
@@ -171,7 +171,7 @@ In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge y
 
 1. Copy the `.config.sample.env` to `.config.env` and start filling out all the environment variables.
 
-    **All are required** unless otherwise noted in the comments.
+   **All are required** unless otherwise noted in the comments.
 
     ```sh
     cp .config.sample.env .config.env
@@ -228,6 +228,13 @@ In order to use Terraform and `cert-manager` with the Cloudflare DNS challenge y
     ```sh
     task ansible:reboot
     ```
+
+7. (optional) Prevent green LEDs from blinking when booting from SSD (SD card consistent polling). [Thanks to James Chambers for the finding](https://jamesachambers.com/raspberry-pi-reclaim-1-cpu-usage-when-ssd-msd-booting/)
+
+   ```sh
+   # add in EOF /boot/firmware/config.txt
+   dtparam=sd_poll_once
+   ```
 
 ### ⛵ Installing k3s with Ansible
 
@@ -316,11 +323,11 @@ The cluster application [external-dns](https://github.com/kubernetes-sigs/extern
     task cluster:flux:secret
     ```
 
-    📍 Variables defined in `./cluster/base/cluster-secrets.sops.yaml` and `./cluster/base/cluster-settings.yaml` will be usable anywhere in your YAML manifests under `./cluster` except `./cluster/base`
+   📍 Variables defined in `./cluster/base/cluster-secrets.sops.yaml` and `./cluster/base/cluster-settings.yaml` will be usable anywhere in your YAML manifests under `./cluster` except `./cluster/base`
 
 4. Push you changes to git
 
-    📍 **Verify** all the `*.sops.yaml` and `*.sops.yml` files under the `./cluster` and `./provision` folders are **encrypted** with SOPS
+   📍 **Verify** all the `*.sops.yaml` and `*.sops.yml` files under the `./cluster` and `./provision` folders are **encrypted** with SOPS
 
     ```sh
     git add -A
@@ -330,7 +337,7 @@ The cluster application [external-dns](https://github.com/kubernetes-sigs/extern
 
 5. Install Flux
 
-    📍 Due to race conditions with the Flux CRDs you will have to run the below command twice. There should be no errors on this second run.
+   📍 Due to race conditions with the Flux CRDs you will have to run the below command twice. There should be no errors on this second run.
 
     ```sh
     task cluster:flux:install
@@ -441,7 +448,7 @@ Flux is pull-based by design meaning it will periodically check your git reposit
     # github-receiver   6h8m   True    Receiver initialized with URL: /hook/12ebd1e363c641dc3c2e430ecf3cee2b3c7a5ac9e1234506f6f5f3ce1230e123
     ```
 
-    So if my domain was `k8s-at-home.com` the full url would look like this:
+   So if my domain was `k8s-at-home.com` the full url would look like this:
 
     ```text
     https://flux-receiver.k8s-at-home.com/hook/12ebd1e363c641dc3c2e430ecf3cee2b3c7a5ac9e1234506f6f5f3ce1230e123
@@ -453,7 +460,7 @@ Flux is pull-based by design meaning it will periodically check your git reposit
     sops -d ./cluster/apps/flux-system/webhooks/github/secret.sops.yaml | yq .stringData.token
     ```
 
-    **Note:** Don't forget to update the `BOOTSTRAP_FLUX_GITHUB_WEBHOOK_SECRET` variable in your `.config.env` file so it matches the generated secret if applicable
+   **Note:** Don't forget to update the `BOOTSTRAP_FLUX_GITHUB_WEBHOOK_SECRET` variable in your `.config.env` file so it matches the generated secret if applicable
 
 Now that you have the webhook url and secret, it's time to set everything up on the Github repository side. Navigate to the settings of your repository on Github, under "Settings/Webhooks" press the "Add webhook" button. Fill in the webhook url and your secret.
 
@@ -483,66 +490,66 @@ The benefits of a public repository include:
 <details>
   <summary>Expand to read guide on adding Flux SSH authentication</summary>
 
-  1. Generate new SSH key:
-      ```sh
-      ssh-keygen -t ecdsa -b 521 -C "github-deploy-key" -f ./cluster/github-deploy-key -q -P ""
-      ```
-  2. Paste public key in the deploy keys section of your repository settings
-  3. Create sops secret in `cluster/base/flux-system/github-deploy-key.sops.yaml` with the contents of:
-      ```yaml
-      # yamllint disable
-      apiVersion: v1
-      kind: Secret
-      metadata:
-          name: github-deploy-key
-          namespace: flux-system
-      stringData:
-          # 3a. Contents of github-deploy-key
-          identity: |
-              -----BEGIN OPENSSH PRIVATE KEY-----
-                  ...
-              -----END OPENSSH PRIVATE KEY-----
-          # 3b. Output of curl --silent https://api.github.com/meta | jq --raw-output '"github.com "+.ssh_keys[]'
-          known_hosts: |
-              github.com ssh-ed25519 ...
-              github.com ecdsa-sha2-nistp256 ...
-              github.com ssh-rsa ...
-      ```
-  4. Encrypt secret:
-      ```sh
-      sops --encrypt --in-place ./cluster/base/flux-system/github-deploy-key.sops.yaml
-      ```
-  5. Apply secret to cluster:
-      ```sh
-      sops --decrypt cluster/base/flux-system/github-deploy-key.sops.yaml | kubectl apply -f -
-      ```
-  6.  Update `cluster/base/flux-system/gotk-sync.yaml`:
-      ```yaml
-      ---
-      apiVersion: source.toolkit.fluxcd.io/v1beta2
-      kind: GitRepository
-      metadata:
-        name: flux-system
+1. Generate new SSH key:
+    ```sh
+    ssh-keygen -t ecdsa -b 521 -C "github-deploy-key" -f ./cluster/github-deploy-key -q -P ""
+    ```
+2. Paste public key in the deploy keys section of your repository settings
+3. Create sops secret in `cluster/base/flux-system/github-deploy-key.sops.yaml` with the contents of:
+    ```yaml
+    # yamllint disable
+    apiVersion: v1
+    kind: Secret
+    metadata:
+        name: github-deploy-key
         namespace: flux-system
-      spec:
-        interval: 5m0s
-        # 6a: Change this to your user and repo names
-        url: ssh://git@github.com/$user/$repo
-        ref:
-          branch: main
-        secretRef:
-          name: github-deploy-key
-      ```
-  7. Commit and push changes
-  8. Force flux to reconcile your changes
-     ```sh
-     task cluster:reconcile
-     ```
-  9. Verify git repository is now using SSH:
-      ```sh
-      task cluster:gitrepositories
-      ```
-  10. Optionally set your repository to Private in your repository settings.
+    stringData:
+        # 3a. Contents of github-deploy-key
+        identity: |
+            -----BEGIN OPENSSH PRIVATE KEY-----
+                ...
+            -----END OPENSSH PRIVATE KEY-----
+        # 3b. Output of curl --silent https://api.github.com/meta | jq --raw-output '"github.com "+.ssh_keys[]'
+        known_hosts: |
+            github.com ssh-ed25519 ...
+            github.com ecdsa-sha2-nistp256 ...
+            github.com ssh-rsa ...
+    ```
+4. Encrypt secret:
+    ```sh
+    sops --encrypt --in-place ./cluster/base/flux-system/github-deploy-key.sops.yaml
+    ```
+5. Apply secret to cluster:
+    ```sh
+    sops --decrypt cluster/base/flux-system/github-deploy-key.sops.yaml | kubectl apply -f -
+    ```
+6.  Update `cluster/base/flux-system/gotk-sync.yaml`:
+    ```yaml
+    ---
+    apiVersion: source.toolkit.fluxcd.io/v1beta2
+    kind: GitRepository
+    metadata:
+      name: flux-system
+      namespace: flux-system
+    spec:
+      interval: 5m0s
+      # 6a: Change this to your user and repo names
+      url: ssh://git@github.com/$user/$repo
+      ref:
+        branch: main
+      secretRef:
+        name: github-deploy-key
+    ```
+7. Commit and push changes
+8. Force flux to reconcile your changes
+   ```sh
+   task cluster:reconcile
+   ```
+9. Verify git repository is now using SSH:
+    ```sh
+    task cluster:gitrepositories
+    ```
+10. Optionally set your repository to Private in your repository settings.
 </details>
 
 ## 👉 Troubleshooting

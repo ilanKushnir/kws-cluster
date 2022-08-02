@@ -89,6 +89,16 @@ For those who wants to go to the next stage - yes! you can install the same clus
 
 <br/>
 
+## ☠️️ Disaster recovery plan
+There are 3 types of backups should be done on the cluster:
+* Longhorn PV/PVCs backups
+* ETCD state backup
+* NAS data backup
+
+For more details go to `/docs/DR-plan.md`
+
+<br/>
+
 ## 🤝 Graditude
 Thanks to the great supportive community at [Kubernetes @Home](https://github.com/k8s-at-home/).
 Most of the support and inspiration for my cluster came from [onedr0p](https://github.com/onedr0p/) and from his [super cluster](https://github.com/onedr0p/home-ops).
