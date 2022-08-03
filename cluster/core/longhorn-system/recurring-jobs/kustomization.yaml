@@ -5,3 +5,4 @@ resources:
   - medium.yaml
   - high.yaml
   - default.yaml
+  - none.yaml
