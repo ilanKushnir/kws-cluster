@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: error-pages
-      version: 1.1.2
+      version: 1.2.2
       sourceRef:
         kind: HelmRepository
         name: k8s-at-home-charts
@@ -28,7 +28,7 @@ spec:
   values:
     image:
       repository: ghcr.io/tarampampam/error-pages
-      tag: 2.16.0
+      tag: 2.17.0
     env:
       TEMPLATE_NAME: lost-in-space
       SHOW_DETAILS: "false"
