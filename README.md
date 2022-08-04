@@ -95,7 +95,7 @@ There are 3 types of backups should be done on the cluster:
 * ETCD state backup
 * NAS data backup
 
-For more details go to `/docs/DR-plan.md`
+For more details go to [/docs/DR-plan.md](https://github.com/ilanKushnir/kws-cluster/blob/main/docs/DR-plan.md)
 
 ### Backups flow
 <div align="center">
