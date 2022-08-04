@@ -17,12 +17,21 @@ So please maintain the following backups for a doomsday:
     * you can set the above both in LH's UI or in defining annotations for recurring jobs
 * ETCD state backup - can be stored in S3
 
+### Backups flow
+<div align="center">
+<img src="https://github.com/ilanKushnir/kws-cluster/blob/main/docs/diagrams/backups-flow.drawio.png?raw=true" align="center" width="600"/>
+</div>
+<br/>
+
+<br/>
+
 ## 📝 TODOs
 
-* Copy NAS data to S3 Bcuket
-* Define three BU groups for LH (`low`,`medium`,`high` )
-* Define recurring jobs for each group `snapshots` & `backups`
-* Plan an automatic flow
+* Copy NAS data to S3 Bcuket / Glacier
+V Define three BU groups for LH (`low`,`medium`,`high` )
+V Define recurring jobs for each group `snapshots` & `backups`
+V Plan an automatic flow
+* add current backup layers flow to readme (draw.io diagram)
 
 ## 🚶 Recovery steps - General cluster failure
 1. Reinstall OS on SSDs (`Ubuntu 22.04`)
