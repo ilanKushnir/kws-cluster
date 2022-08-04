@@ -99,7 +99,7 @@ For more details go to `/docs/DR-plan.md`
 
 ### Backups flow
 <div align="center">
-<img src="https://github.com/ilanKushnir/kws-cluster/blob/main/docs/diagrams/backups-flow.drawio.png?raw=true" align="center" width="600"/>
+<img src="https://github.com/ilanKushnir/kws-cluster/blob/main/docs/diagrams/backups-flow.png?raw=true" align="center" width="600"/>
 </div>
 <br/>
 
