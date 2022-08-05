@@ -20,7 +20,7 @@ spec:
   values:
     persistence:
       defaultClass: true
-      defaultClassReplicaCount: 3
+      defaultClassReplicaCount: 4
       reclaimPolicy: Retain
     defaultSettings:
       backupstorePollInterval: 300
@@ -31,7 +31,7 @@ spec:
       nodeDownPodDeletionPolicy: delete-both-statefulset-and-deployment-pod
       concurrentAutomaticEngineUpgradePerNodeLimit: 1
       storageMinimalAvailablePercentage: 10
-      defaultReplicaCount: 3
+      defaultReplicaCount: 4
       defaultLonghornStaticStorageClass: longhorn
     ingress:
       enabled: true
