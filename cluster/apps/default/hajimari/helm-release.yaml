@@ -56,6 +56,9 @@ spec:
         - name: Pi-Hole
           url: "http://${LOCAL_DNS_SERVER_ADDR}/admin"
           icon: pi-hole
+        - name: Uptime
+          url: "http://${MONITOR_ADDR}:${MONITOR_UPTIME_PORT}"
+          icon: thermostat-box
       groups:
         - name: KWS Cluster
           links:
