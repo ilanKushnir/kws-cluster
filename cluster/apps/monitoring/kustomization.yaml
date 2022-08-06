@@ -6,4 +6,4 @@ resources:
   - karma
   - kube-prometheus-stack
   - speedtest-exporter
-  - uptime-kuma
+#  - uptime-kuma
