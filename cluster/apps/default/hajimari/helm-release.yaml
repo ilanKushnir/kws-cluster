@@ -57,11 +57,13 @@ spec:
           url: "http://${LOCAL_DNS_SERVER_ADDR}/admin"
           icon: pi-hole
         - name: Uptime
-          url: "http://${MONITOR_ADDR}:${MONITOR_UPTIME_PORT}"
+          url: "http://uptime.${SECRET_DOMAIN}"
           icon: thermostat-box
       groups:
         - name: KWS Cluster
           links:
+            - name: KWS Status page
+              url: "http://uptime.${SECRET_DOMAIN}/status/kws"
             - name: KWS GitOps
               url: "https://github.com/ilanKushnir/kws-cluster"
             - name: KWS Charts
