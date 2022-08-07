@@ -6,7 +6,7 @@ resources:
   - lidarr
   - media-browser
   - navidrome
-  - overseerr
+#  - overseerr
   - plex
   - prowlarr
   - pyload
@@ -15,7 +15,7 @@ resources:
   - readarr
   - sabnzbd
   - sonarr
-  - tautulli
+#  - tautulli
   - trash-updater
   - unpackerr
   - calibre
