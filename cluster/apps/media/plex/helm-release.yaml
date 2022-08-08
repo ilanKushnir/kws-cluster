@@ -126,5 +126,5 @@ spec:
           runAsUser: 0
         resources:
           requests:
-            cpu: 10m
-            memory: 60M
+            cpu: 1000m
+            memory: 4000M
