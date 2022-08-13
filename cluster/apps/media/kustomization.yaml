@@ -11,7 +11,7 @@ resources:
   - prowlarr
   - pyload
   - qbittorrent
-#  - radarr
+  - radarr
   - readarr
 #  - sabnzbd
   - sonarr
