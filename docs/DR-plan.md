@@ -47,9 +47,15 @@ V Plan an automatic flow
    * Mount disks
    * Make them schedulable
    * Make sure you can access the S3 backups
-6. Git repo - Reset main branch to current state
+6. Bug fix: blacklist `multipathd` (only if/after deploying Longhorn) [source](https://longhorn.io/kb/troubleshooting-volume-with-multipath/)
+   * ssh into every node and do the following:
+     * `sudo nano /etc/multipath.conf`
+     * add: `blacklist { devnode "^sd[a-z0-9]+" }`
+     * Restart multipath service: `systemctl restart multipathd.service`
+     * Verify that configuration is applied: `multipath -t`
+7. Git repo - Reset main branch to current state
    * if it fails, reset step by step
-7. Recover PV/PVCs, same steps for each deployment
+8. Recover PV/PVCs, same steps for each deployment
    * Deploy and make sure its running properly
    * Scale to `0`
    * Delete `PVC`

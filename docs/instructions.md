@@ -357,6 +357,13 @@ The cluster application [external-dns](https://github.com/kubernetes-sigs/extern
     # notification-controller-7c46575844-k4bvr   1/1     Running   0          1h
     # source-controller-7d6875bcb4-zqw9f         1/1     Running   0          1h
     ```
+### 🐞 Important bug fixes!
+**Longhorn:** blacklist `multipathd` (only if/after deploying Longhorn) [source](https://longhorn.io/kb/troubleshooting-volume-with-multipath/)
+   * ssh into every node and do the following:
+      * `sudo nano /etc/multipath.conf`
+      * add: `blacklist { devnode "^sd[a-z0-9]+" }`
+      * Restart multipath service: `systemctl restart multipathd.service`
+      * Verify that configuration is applied: `multipath -t`
 
 ### 🎤 Verification Steps
 
