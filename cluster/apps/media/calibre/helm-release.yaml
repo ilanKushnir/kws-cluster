@@ -36,8 +36,19 @@ spec:
         mountPath: /data/books
 
     service:
+      main:
+        ports:
+          http:
+            port: 8080
       webserver:
         enabled: true
+        ports:
+          webserver:
+            enabled: true
+            port: 8081
+            protocol: TCP
+            targetPort: 8081
+        type: ClusterIP
 
     ingress:
       main:
